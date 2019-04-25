@@ -59,7 +59,7 @@ def check_in_EL(ip_address, port, protocol, last_test_date):
 	"""
 	check whether the result is already in ELK
 	"""
-	index_name = "services"
+	index_name = "externalservices"
 	try:
 		client = Elasticsearch([{'host':'localhost','port':9200}])
 		query = Q('match', ip_address=ip_address) & Q('match', port = int(port)) & Q('match',  protocol = protocol) & Q('match', last_test_date = last_test_date)
@@ -82,7 +82,7 @@ def update_service(line):
 
 	# check whether the result is already in the database for today
 	# if yes, no need to check again 
-	index_name = "services"
+	index_name = "externalservices"
 	client = Elasticsearch([{'host':'localhost','port':9200}])
 	today_date = datetime.datetime.now().strftime("%Y-%m-%d")
 	
